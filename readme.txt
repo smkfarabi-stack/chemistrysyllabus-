@@ -295,6 +295,12 @@ Current resource types:
     book
         Book
 
+    previous-year-question
+        Previous Year Questions
+
+    video
+        Video
+
 
 Resource folder mapping:
 
@@ -317,6 +323,14 @@ Resource folder mapping:
     book
         ↓
     assets/resources/books/
+
+    previous-year-question
+        ↓
+    assets/resources/previous-year-questions/
+
+    video
+        ↓
+    assets/resources/videos/
 
 
 ================================================================================

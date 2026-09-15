@@ -378,6 +378,25 @@
           </div>
 
 
+          <!-- Video URL (only for videos) -->
+          <div
+            class="form-group full"
+            id="videoSourceGroup"
+            style="display: none;"
+          >
+            <label for="videoSource">
+              YouTube URL <span class="required">*</span>
+            </label>
+
+            <input
+              type="url"
+              id="videoSource"
+              placeholder="e.g. https://www.youtube.com/watch?v=..."
+              autocomplete="off"
+            >
+          </div>
+
+
           <!-- Resource Type -->
           <div class="form-group">
             <label for="resourceType">
@@ -391,6 +410,8 @@
               <option value="teacher-material">Teacher Material</option>
               <option value="slide">Slides</option>
               <option value="book">Book</option>
+              <option value="previous-year-question">Previous Year Questions</option>
+              <option value="video">Video</option>
             </select>
           </div>
 
@@ -433,7 +454,8 @@
         Generate the code → Copy → Paste into
         <strong>RESOURCES_DATA</strong> in
         <strong>js/resources.js</strong> → Put the actual file inside
-        the automatically selected resource folder.
+        the automatically selected resource folder. For videos, you can
+        use an uploaded video file path or paste a YouTube URL.
       </div>
 
     </section>
@@ -509,6 +531,11 @@
     const resourceTypeSelect =
       document.getElementById("resourceType");
 
+    const videoSourceGroup =
+      document.getElementById("videoSourceGroup");
+    const videoSourceInput =
+      document.getElementById("videoSource");
+
     const output = document.getElementById("output");
     const copyBtn = document.getElementById("copyBtn");
 
@@ -530,7 +557,9 @@
       "personal-note": "personal-notes",
       "teacher-material": "class-notes",
       "slide": "slides",
-      "book": "books"
+      "book": "books",
+      "previous-year-question": "previous-year-questions",
+      "video": "videos"
     };
 
 
@@ -543,8 +572,30 @@
       "personal-note": "Personal Note",
       "teacher-material": "Teacher Material",
       "slide": "Slides",
-      "book": "Book"
+      "book": "Book",
+      "previous-year-question": "Previous Year Questions",
+      "video": "Video"
     };
+
+
+    /*
+     * Show the YouTube URL field only for video resources
+     */
+
+    function updateVideoSourceField() {
+
+      const isVideo =
+        resourceTypeSelect.value === "video";
+
+      videoSourceGroup.style.display =
+        isVideo ? "flex" : "none";
+
+      videoSourceInput.required = isVideo;
+
+      if (!isVideo) {
+        videoSourceInput.value = "";
+      }
+    }
 
 
     /*
@@ -901,8 +952,27 @@
           type
         );
 
-      const filePath =
+      let filePath =
         `assets/resources/${folder}/${fileName}`;
+
+      if (type === "video") {
+
+        const videoUrl =
+          videoSourceInput.value.trim();
+
+        if (!videoUrl) {
+
+          showError("Please enter the YouTube URL.");
+
+          videoSourceInput.focus();
+
+          return;
+
+        }
+
+        filePath = videoUrl;
+
+      }
 
 
       /*
@@ -992,6 +1062,24 @@
     /*
      * Events
      */
+
+    resourceTypeSelect.addEventListener(
+      "change",
+      () => {
+
+        updateVideoSourceField();
+
+        output.value = "";
+
+        copyBtn.disabled = true;
+
+        status.textContent = "";
+
+        clearError();
+
+      }
+    );
+
 
     courseSelect.addEventListener(
       "change",

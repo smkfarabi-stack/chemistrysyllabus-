@@ -1,17 +1,26 @@
 
 const RESOURCES_DATA = [
 
-  {
-  id: "res-310f-c310f-2-zxcqb",
+{
+  id: "res-310f-c310f-2-gx4pw",
   courseCode: "310F",
   chapterId: "c310f-2",
   chapterTitle: "Magnetic properties of substances",
-  title: "Farabi Class Note",
-  type: "class-note",
-  fileName: "farabi.pdf",
-  filePath: "assets/resources/class-notes/farabi.pdf"
+  title: "Megnetic Video",
+  type: "video",
+  fileName: "megnetic",
+  filePath: "https://youtu.be/Z4iE3aaNeTM?si=uwZQVwJY1bArWqqy"
 },
-
+{
+  id: "res-330f-c330f-2-9ghvr",
+  courseCode: "330F",
+  chapterId: "c330f-2",
+  chapterTitle: "Organic reaction mechanisms",
+  title: "Organic Chemistry Solomons Book",
+  type: "book",
+  fileName: "Organic Chemistry Solomons.pdf",
+  filePath: "assets/resources/books/Organic Chemistry Solomons.pdf"
+},
 
 ];
 
@@ -50,6 +59,18 @@ const RESOURCE_TYPES = {
     label: "Book",
     folder: "books",
     icon: "📚"
+  },
+
+  "previous-year-question": {
+    label: "Previous Year Questions",
+    folder: "previous-year-questions",
+    icon: "📄"
+  },
+
+  "video": {
+    label: "Video",
+    folder: "videos",
+    icon: "🎥"
   }
 
 };
@@ -89,6 +110,24 @@ const FILE_TYPES = {
     label: "PowerPoint",
     extensions: [".ppt"],
     icon: "📊"
+  },
+
+  mp4: {
+    label: "Video",
+    extensions: [".mp4"],
+    icon: "🎥"
+  },
+
+  webm: {
+    label: "Video",
+    extensions: [".webm"],
+    icon: "🎥"
+  },
+
+  mov: {
+    label: "Video",
+    extensions: [".mov"],
+    icon: "🎥"
   }
 };
 
@@ -238,7 +277,9 @@ function getGroupedChapterResources(courseCode, chapterId) {
     "personal-note": [],
     "teacher-material": [],
     "slide": [],
-    "book": []
+    "book": [],
+    "previous-year-question": [],
+    "video": []
 
   };
 

@@ -902,7 +902,7 @@ function renderResourcesView() {
 
           <p>
             Browse class notes, personal notes,
-            teacher materials, slides and books.
+            teacher materials, slides, books, previous year questions and videos.
           </p>
 
         </div>
@@ -952,6 +952,20 @@ function renderResourcesView() {
           data-resource-filter="book"
         >
           📚 Books
+        </button>
+
+        <button
+          class="filter-btn"
+          data-resource-filter="previous-year-question"
+        >
+          📄 Previous Year Questions
+        </button>
+
+        <button
+          class="filter-btn"
+          data-resource-filter="video"
+        >
+          🎥 Videos
         </button>
 
       </div>

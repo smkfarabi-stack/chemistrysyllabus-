@@ -12,9 +12,24 @@ function generateResourceCode(config) {
 { title: "${fileName}", url: "${filePath}" }
 `;
   } else {
+    const folders = {
+      "class-note": "class-notes",
+      "personal-note": "personal-notes",
+      "teacher-material": "class-notes",
+      "slide": "slides",
+      "book": "books",
+      "previous-year-question": "previous-year-questions",
+      "video": "videos"
+    };
+
+    const generatedPath =
+      resourceType === "video"
+        ? filePath
+        : `assets/resources/${folders[resourceType]}/${fileName}`;
+
     return `
 // Add to CHAPTER_RESOURCES["${chapterId}"].${resourceType}
-{ name: "${fileName}", path: "${filePath}", type: "${fileType}" }
+{ name: "${fileName}", path: "${generatedPath}", type: "${fileType}" }
 `;
   }
 }
